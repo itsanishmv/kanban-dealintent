@@ -33,6 +33,20 @@ const KanbanColumnPage = ({ params }: Props) => {
     const newColumn = columns.filter((col) => col.id !== id);
     setColumns(newColumn)
   }
+  function updateColumnTitle(id, title) {
+    const updatedColumnTitle = columns.map((column) => {
+      if (column.id === id) {
+        return {...column , title}
+      } else {
+        return column
+      }
+    });
+    console.log("updated")
+    console.log("title :  " , title)
+    if (title !== "") {
+      setColumns(updatedColumnTitle)
+    } 
+  }
   return (
     <div className="min-h-screen max-w-screen  flex  flex-col items-center p-20 w-full ">
       <div className="w-3/4">
@@ -48,7 +62,7 @@ const KanbanColumnPage = ({ params }: Props) => {
       <div className="flex items-start  overflow-x-auto  mt-8 pb-28">
         <div className="flex gap-4  ">
           {columns.map(({ id, title }) => (
-            <KanbanColumn key={id} title={title} id={id} deleteColumn={deleteColumn}  />
+            <KanbanColumn key={id} title={title} id={id} deleteColumn={deleteColumn} updateColumnTitle={updateColumnTitle} />
           ))}
         </div>
         <button className="flex" onClick={addColumn}>
