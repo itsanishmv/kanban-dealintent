@@ -15,7 +15,21 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-
-body {
-
+@layer utilities {
+  @variants responsive {
+  
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;  
+        scrollbar-width: none;  
+    }
+  }
+}
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-thumb{
+  @apply bg-[lightgrey]
 }
