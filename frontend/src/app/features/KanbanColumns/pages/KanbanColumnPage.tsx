@@ -19,9 +19,9 @@ const KanbanColumnPage = ({ params }: Props) => {
     {
       id: nanoid(),
       title: `Completed`,
-    }
+    },
   ]);
-
+  
   function addColumn() {
     const newColumn = {
       id: nanoid(),
@@ -29,24 +29,24 @@ const KanbanColumnPage = ({ params }: Props) => {
     };
     setColumns([...columns, newColumn]);
   }
-  function deleteColumn(id : string) {
+  function deleteColumn(id: string) {
     const newColumn = columns.filter((col) => col.id !== id);
-    setColumns(newColumn)
+    setColumns(newColumn);
   }
   function updateColumnTitle(id, title) {
     const updatedColumnTitle = columns.map((column) => {
       if (column.id === id) {
-        return {...column , title}
+        return { ...column, title };
       } else {
-        return column
+        return column;  
       }
     });
-    console.log("updated")
-    console.log("title :  " , title)
+  
     if (title !== "") {
-      setColumns(updatedColumnTitle)
-    } 
+      setColumns(updatedColumnTitle);
+    }
   }
+
   return (
     <div className="min-h-screen max-w-screen  flex  flex-col items-center p-20 w-full ">
       <div className="w-3/4">
@@ -57,18 +57,26 @@ const KanbanColumnPage = ({ params }: Props) => {
           additional context or subtasks.
         </p>
       </div>
-      
+
       <div className="w-full flex justify-center">
-      <div className="flex items-start  overflow-x-auto  mt-8 pb-28">
-        <div className="flex gap-4  ">
-          {columns.map(({ id, title }) => (
-            <KanbanColumn key={id} title={title} id={id} deleteColumn={deleteColumn} updateColumnTitle={updateColumnTitle} />
-          ))}
+        <div className="flex items-start  overflow-x-auto  mt-8 pb-28">
+          <div className="flex gap-4  ">
+            
+              {columns.map(({ id, title }) => (
+                <KanbanColumn
+                  key={id}
+                  title={title}
+                  id={id}
+                  deleteColumn={deleteColumn}
+                  updateColumnTitle={updateColumnTitle}
+                />
+              ))}
+           
+          </div>
+          <button className="flex" onClick={addColumn}>
+            <PlusIcon size="md" />
+          </button>
         </div>
-        <button className="flex" onClick={addColumn}>
-          <PlusIcon size="md" />
-        </button>
-      </div>
       </div>
     </div>
   );
